@@ -12,7 +12,6 @@ android:
     - build-tools-29.0.3
     - android-26
     - android-29
-
 script:
   # 生成 APK
   - ./gradlew assembleRelease
