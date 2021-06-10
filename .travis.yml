@@ -1,5 +1,3 @@
-# .travis.yml 文件
-
 # 声明构建语言环境
 language: android
 jdk: oraclejdk8
@@ -9,16 +7,22 @@ android:
   components:
     - platform-tools
     - tools
+    # 构建项目所用的BuildTools版本
     - build-tools-29.0.3
-    - android-26
+    # 用来编译项目的SDK版本
     - android-29
+
+before_script:
+  - chmod +x gradlew
+
+# 运行脚本
 script:
-  # 生成 APK
+  # 生成release apk包
   - ./gradlew assembleRelease
 
 # 部署
 deploy:
-  # 部署到GitHub Release。
+  # 部署到GitHub Release
   provider: releases
   # Github oauth token
   api_key: ${TOKEN}
@@ -28,4 +32,4 @@ deploy:
   skip_cleanup: true
   # 发布时机
   on:
-    branch: master
+    tags: true
